@@ -48,10 +48,6 @@ extern zend_module_entry timeuuid_module_entry;
 #include "TSRM.h"
 #endif
 
-PHP_MINIT_FUNCTION(timeuuid);
-PHP_MSHUTDOWN_FUNCTION(timeuuid);
-PHP_RINIT_FUNCTION(timeuuid);
-PHP_RSHUTDOWN_FUNCTION(timeuuid);
 PHP_MINFO_FUNCTION(timeuuid);
 
 PHP_FUNCTION(timeuuid);
