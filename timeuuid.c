@@ -39,7 +39,7 @@
 
 #include <uuid/uuid.h>
 
-static int timeuuid_safe = 1;
+static strsize timeuuid_safe = 1;
 
 /* {{{ timeuuid_functions[]
  */
@@ -52,9 +52,7 @@ const zend_function_entry timeuuid_functions[] = {
 /* {{{ timeuuid_module_entry
  */
 zend_module_entry timeuuid_module_entry = {
-#if ZEND_MODULE_API_NO >= 20010901
     STANDARD_MODULE_HEADER,
-#endif
     "timeuuid",
     timeuuid_functions,
     NULL,
@@ -62,9 +60,7 @@ zend_module_entry timeuuid_module_entry = {
     NULL,
     NULL,
     PHP_MINFO(timeuuid),
-#if ZEND_MODULE_API_NO >= 20010901
     PHP_TIMEUUID_VERSION,
-#endif
     STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -79,6 +75,7 @@ PHP_MINFO_FUNCTION(timeuuid)
 {
     php_info_print_table_start();
     php_info_print_table_header(2, "timeuuid support", "enabled");
+    php_info_print_table_header(2, "timeuuid version", PHP_TIMEUUID_VERSION);
     php_info_print_table_end();
 }
 /* }}} */
@@ -105,6 +102,6 @@ PHP_FUNCTION(timeuuid)
     }
 
     uuid_unparse(uuid, uuid_str);
-    RETURN_STRING(uuid_str, 1);
+    UUID_RETSTR(uuid_str);
 }
 /* }}} */
