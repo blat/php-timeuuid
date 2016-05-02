@@ -34,7 +34,7 @@
 extern zend_module_entry timeuuid_module_entry;
 #define phpext_timeuuid_ptr &timeuuid_module_entry
 
-#define PHP_TIMEUUID_VERSION "0.1.0"
+#define PHP_TIMEUUID_VERSION "0.2.0"
 
 #ifdef PHP_WIN32
 #    define PHP_TIMEUUID_API __declspec(dllexport)
@@ -42,6 +42,14 @@ extern zend_module_entry timeuuid_module_entry;
 #    define PHP_TIMEUUID_API __attribute__ ((visibility("default")))
 #else
 #    define PHP_TIMEUUID_API
+#endif
+
+#if PHP_MAJOR_VERSION < 7
+typedef int  strsize;
+#define UUID_RETSTR(a)    RETURN_STRING(a,1)
+#else
+typedef size_t strsize;
+#define UUID_RETSTR(a)    RETURN_STRING(a)
 #endif
 
 #ifdef ZTS
